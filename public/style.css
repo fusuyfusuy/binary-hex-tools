@@ -1,0 +1,446 @@
+:root {
+  --bg-primary: #0a0e14;
+  --bg-secondary: #121820;
+  --bg-tertiary: #1b2430;
+  --border: #263545;
+  --border-focus: #3b82f6;
+  --text-main: #e6edf3;
+  --text-muted: #8b949e;
+  --accent-cyan: #38bdf8;
+  --accent-green: #4ade80;
+  --accent-orange: #fb923c;
+  --accent-purple: #c084fc;
+  --bit-on: #22c55e;
+  --bit-off: #1e293b;
+  --bit-border: #334155;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Consolas, Monaco, monospace;
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  padding: 24px 16px;
+  min-height: 100vh;
+}
+
+.shell {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-badge {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.25rem;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  letter-spacing: -0.5px;
+}
+
+.brand h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.tagline {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 9999px;
+}
+
+.status-indicator .dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-green);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+}
+
+/* Cards */
+.workbench {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.card-header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+}
+
+.card-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Grid & Inputs */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-group.full-width {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.input-wrap:focus-within {
+  border-color: var(--border-focus);
+}
+
+.prefix {
+  padding-left: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  padding: 10px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.copy-btn {
+  background: var(--bg-secondary);
+  border: none;
+  border-left: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0 14px;
+  height: 100%;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.copy-btn:hover {
+  background: var(--border);
+  color: var(--text-main);
+}
+
+/* Bitboard Section */
+.bitboard-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn:hover {
+  background: var(--border);
+}
+
+.bit-labels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.bit-grid {
+  display: grid;
+  grid-template-columns: repeat(32, minmax(0, 1fr));
+  gap: 3px;
+  background: var(--bg-tertiary);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.bit-cell {
+  aspect-ratio: 1 / 1.4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--bit-border);
+  background: var(--bit-off);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 4px;
+  user-select: none;
+  transition: all 0.1s ease;
+}
+
+.bit-cell:hover {
+  border-color: var(--accent-cyan);
+}
+
+.bit-cell.active {
+  background: var(--bit-on);
+  color: #052e16;
+  border-color: #86efac;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.4);
+}
+
+.bit-idx {
+  font-size: 0.55rem;
+  opacity: 0.7;
+}
+
+.telemetry-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: var(--bg-tertiary);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.telemetry-item .label {
+  color: var(--text-muted);
+  margin-right: 6px;
+  font-size: 0.75rem;
+}
+
+.telemetry-item .val {
+  color: var(--accent-orange);
+  font-weight: 600;
+}
+
+/* Bitwise Workbench */
+.bitwise-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.operand-box label {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.operand-row {
+  display: flex;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.select-radix {
+  background: var(--bg-secondary);
+  border: none;
+  border-right: 1px solid var(--border);
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0 10px;
+  outline: none;
+  cursor: pointer;
+}
+
+.results-table-wrap {
+  overflow-x: auto;
+}
+
+.bitwise-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.bitwise-table th, .bitwise-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.bitwise-table th {
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.bitwise-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.bitwise-table .op-name {
+  color: var(--accent-purple);
+  font-weight: 600;
+}
+
+.bitwise-table .op-bin {
+  letter-spacing: 1px;
+}
+
+/* Hexdump */
+.hexdump-controls {
+  margin-bottom: 12px;
+}
+
+.hexdump-controls textarea {
+  border: 1px solid var(--border);
+  background: var(--bg-tertiary);
+  border-radius: 6px;
+  width: 100%;
+  padding: 12px;
+}
+
+.hexdump-view {
+  background: #05080c;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #38bdf8;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* Footer */
+.app-footer {
+  margin-top: 36px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.app-footer a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+}
+
+.app-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .bit-grid {
+    grid-template-columns: repeat(16, minmax(0, 1fr));
+    gap: 4px;
+  }
+  .bit-labels {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
