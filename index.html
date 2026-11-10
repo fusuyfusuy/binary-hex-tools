@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BitCraft — Binary & Hex Operations Workbench</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="app-header">
+      <div class="brand">
+        <span class="logo-badge">0x</span>
+        <div>
+          <h1>BitCraft</h1>
+          <p class="tagline">Binary & Hexadecimal Operations Laboratory</p>
+        </div>
+      </div>
+      <div class="status-indicator">
+        <span class="dot"></span>
+        <span class="status-text">STATIC RUNTIME READY</span>
+      </div>
+    </header>
+
+    <main class="workbench">
+      <!-- Section 1: Live Radix Converter -->
+      <section class="card">
+        <div class="card-header">
+          <h2>1. Live Radix Converter</h2>
+          <span class="card-hint">Edit any field to synchronize all formats</span>
+        </div>
+        <div class="grid grid-2">
+          <div class="field-group">
+            <label for="input-dec">Decimal (Base 10)</label>
+            <div class="input-wrap">
+              <input type="text" id="input-dec" placeholder="e.g. 4294967295" autocomplete="off" spellcheck="false">
+              <button class="copy-btn" data-target="input-dec" title="Copy">Copy</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="input-hex">Hexadecimal (Base 16)</label>
+            <div class="input-wrap">
+              <span class="prefix">0x</span>
+              <input type="text" id="input-hex" placeholder="e.g. DEADBEAF" autocomplete="off" spellcheck="false">
+              <button class="copy-btn" data-target="input-hex" title="Copy">Copy</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="input-bin">Binary (Base 2)</label>
+            <div class="input-wrap">
+              <span class="prefix">0b</span>
+              <input type="text" id="input-bin" placeholder="e.g. 11010010" autocomplete="off" spellcheck="false">
+              <button class="copy-btn" data-target="input-bin" title="Copy">Copy</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="input-oct">Octal (Base 8)</label>
+            <div class="input-wrap">
+              <span class="prefix">0o</span>
+              <input type="text" id="input-oct" placeholder="e.g. 377" autocomplete="off" spellcheck="false">
+              <button class="copy-btn" data-target="input-oct" title="Copy">Copy</button>
+            </div>
+          </div>
+
+          <div class="field-group full-width">
+            <label for="input-ascii">ASCII Text Representation</label>
+            <div class="input-wrap">
+              <input type="text" id="input-ascii" placeholder="Type text here..." autocomplete="off" spellcheck="false">
+              <button class="copy-btn" data-target="input-ascii" title="Copy">Copy</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Interactive 32-bit Flipper -->
+      <section class="card">
+        <div class="card-header">
+          <h2>2. 32-Bit Interactive Bitboard</h2>
+          <div class="bitboard-actions">
+            <button id="btn-all-ones" class="btn btn-sm">Set All (1)</button>
+            <button id="btn-all-zeros" class="btn btn-sm">Clear (0)</button>
+            <button id="btn-invert-bits" class="btn btn-sm">Invert</button>
+            <button id="btn-shl" class="btn btn-sm">&lt;&lt; 1</button>
+            <button id="btn-shr" class="btn btn-sm">&gt;&gt; 1</button>
+          </div>
+        </div>
+
+        <div class="bitboard-container">
+          <div class="bit-labels">
+            <span>Byte 3 (MSB: 31..24)</span>
+            <span>Byte 2 (23..16)</span>
+            <span>Byte 1 (15..8)</span>
+            <span>Byte 0 (LSB: 7..0)</span>
+          </div>
+          <div id="bit-grid" class="bit-grid">
+            <!-- Populated via JavaScript -->
+          </div>
+        </div>
+
+        <div class="telemetry-bar">
+          <div class="telemetry-item">
+            <span class="label">Hex:</span>
+            <span id="tel-hex" class="val">0x00000000</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="label">Unsigned 32-bit:</span>
+            <span id="tel-u32" class="val">0</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="label">Signed 32-bit:</span>
+            <span id="tel-i32" class="val">0</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="label">Popcount (set bits):</span>
+            <span id="tel-pop" class="val">0</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Bitwise Operations Laboratory -->
+      <section class="card">
+        <div class="card-header">
+          <h2>3. Bitwise Operator Workbench</h2>
+          <span class="card-hint">Calculates two-operand bitwise logic</span>
+        </div>
+
+        <div class="bitwise-inputs">
+          <div class="operand-box">
+            <label for="op-a">Operand A</label>
+            <div class="operand-row">
+              <select id="radix-a" class="select-radix">
+                <option value="16">Hex (0x)</option>
+                <option value="10" selected>Dec</option>
+                <option value="2">Bin (0b)</option>
+              </select>
+              <input type="text" id="op-a" value="240" autocomplete="off" spellcheck="false">
+            </div>
+          </div>
+
+          <div class="operand-box">
+            <label for="op-b">Operand B</label>
+            <div class="operand-row">
+              <select id="radix-b" class="select-radix">
+                <option value="16">Hex (0x)</option>
+                <option value="10" selected>Dec</option>
+                <option value="2">Bin (0b)</option>
+              </select>
+              <input type="text" id="op-b" value="15" autocomplete="off" spellcheck="false">
+            </div>
+          </div>
+        </div>
+
+        <div class="results-table-wrap">
+          <table class="bitwise-table">
+            <thead>
+              <tr>
+                <th>Operation</th>
+                <th>Expression</th>
+                <th>Decimal</th>
+                <th>Hexadecimal</th>
+                <th>Binary (32-bit)</th>
+              </tr>
+            </thead>
+            <tbody id="bitwise-results">
+              <!-- Dynamically generated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 4: Hex Dump & Byte Inspector -->
+      <section class="card">
+        <div class="card-header">
+          <h2>4. Hex Dump &amp; Byte Inspector</h2>
+          <span class="card-hint">Formats raw text or byte sequences into standard canonical hexdump format</span>
+        </div>
+        <div class="hexdump-controls">
+          <textarea id="hexdump-input" rows="3" placeholder="Enter text to inspect hex bytes (e.g. Hello, Render!)...">Hello, Render!</textarea>
+        </div>
+        <pre id="hexdump-output" class="hexdump-view"></pre>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <div>BitCraft &bull; Deployed on <a href="https://render.com" target="_blank" rel="noopener">Render</a></div>
+      <div class="git-hash">Static CDN &bull; Pure Client-side JS</div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
